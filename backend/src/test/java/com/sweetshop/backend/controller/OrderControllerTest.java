@@ -15,6 +15,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import java.security.Principal;
+import org.mockito.Mockito;
+import org.springframework.security.core.Authentication;
 
 import java.util.Collections;
 
@@ -40,9 +43,7 @@ class OrderControllerTest {
     // Mock Security Beans to prevent Context Load Failure
     @MockBean private JwtService jwtService;
     @MockBean private CustomUserDetailsService customUserDetailsService;
-
     @Test
-    @WithMockUser(username = "customer") // Simulate logged-in user
     void placeOrder_shouldReturnCreatedOrder() throws Exception {
         OrderRequest request = new OrderRequest();
         request.setItems(Collections.emptyList());
@@ -50,13 +51,20 @@ class OrderControllerTest {
         Order createdOrder = new Order();
         createdOrder.setId(101L);
 
-        // We expect the controller to pass "customer" (from @WithMockUser) to the service
+        // FIX: Mock Authentication instead of Principal
+        Authentication mockAuth = Mockito.mock(Authentication.class);
+        when(mockAuth.getName()).thenReturn("customer");
+
         when(orderService.placeOrder(eq("customer"), any(OrderRequest.class)))
                 .thenReturn(createdOrder);
 
         mockMvc.perform(post("/api/orders")
+                        .principal(mockAuth) // <--- Pass the Authentication mock
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk());
     }
+
+
+
 }

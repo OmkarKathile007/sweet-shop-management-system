@@ -21,6 +21,10 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<Order> placeOrder(@RequestBody OrderRequest request, Authentication authentication) {
-        return ResponseEntity.notFound().build(); // Stub to force failure
+        // authentication.getName() returns the username from the JWT
+        String username = authentication.getName();
+
+        Order order = orderService.placeOrder(username, request);
+        return ResponseEntity.ok(order);
     }
 }
