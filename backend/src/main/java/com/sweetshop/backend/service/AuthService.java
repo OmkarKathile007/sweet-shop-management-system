@@ -16,7 +16,12 @@ public class AuthService {
         this.passwordEncoder = passwordEncoder;
     }
 
+//    public User register(String username, String password, String role) {
+//        return null; // returning null to force test failure
+//    }
     public User register(String username, String password, String role) {
-        return null; // returning null to force test failure
+        String encodedPassword = passwordEncoder.encode(password);
+        User newUser = new User(username, encodedPassword, role);
+        return userRepository.save(newUser);
     }
 }
