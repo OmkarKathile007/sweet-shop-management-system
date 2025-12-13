@@ -13,4 +13,14 @@ class JwtServiceTest {
         assertNotNull(token, "Token should not be null");
         assertTrue(token.length() > 10, "Token should be a valid JWT string");
     }
+
+    @Test
+    void extractUsername_shouldReturnUsername_fromValidToken() {
+        String username = "testUser";
+        String token = jwtService.generateToken(username);
+
+        String extractedUsername = jwtService.extractUsername(token);
+
+        assertEquals(username, extractedUsername);
+    }
 }
