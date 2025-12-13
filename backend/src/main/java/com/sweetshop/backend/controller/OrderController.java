@@ -27,4 +27,10 @@ public class OrderController {
         Order order = orderService.placeOrder(username, request);
         return ResponseEntity.ok(order);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Order>> getUserOrders(Authentication authentication) {
+        String username = authentication.getName();
+        return ResponseEntity.ok(orderService.getOrdersByUser(username));
+    }
 }

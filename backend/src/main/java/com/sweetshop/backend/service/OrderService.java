@@ -13,6 +13,7 @@ import com.sweetshop.backend.model.Sweet;
 import com.sweetshop.backend.model.User;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -61,5 +62,12 @@ public class OrderService {
 
         order.setTotalPrice(totalAmount);
         return orderRepository.save(order);
+    }
+    public List<Order> getOrdersByUser(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // We need to add a method to OrderRepository next!
+        return orderRepository.findByUser(user);
     }
 }

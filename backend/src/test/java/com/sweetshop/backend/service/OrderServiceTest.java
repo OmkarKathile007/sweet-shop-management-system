@@ -15,8 +15,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -66,5 +68,19 @@ class OrderServiceTest {
 
         // Verify that the sweet was saved (implies stock update logic ran)
         verify(sweetRepository).save(laddu);
+    }
+    @Test
+    void getOrdersByUser_shouldReturnOrderList() {
+        String username = "customer";
+        User user = new User(username, "pass", "USER");
+        Order order = new Order(user, 100.0);
+
+        when(userRepository.findByUsername(username)).thenReturn(Optional.of(user));
+        when(orderRepository.findByUser(user)).thenReturn(Collections.singletonList(order));
+
+        List<Order> results = orderService.getOrdersByUser(username);
+
+        assertNotNull(results);
+        assertEquals(1, results.size());
     }
 }
