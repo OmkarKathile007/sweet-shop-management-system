@@ -83,4 +83,40 @@ class SweetServiceTest {
             sweetService.getSweetById(99L);
         });
     }
+
+    @Test
+    void updateSweet_shouldUpdateFields_whenFound() {
+        // Arrange
+        Long id = 1L;
+        Sweet existingSweet = new Sweet("Old Name", "Old Cat", 10.0, 10);
+        existingSweet.setId(id);
+
+        Sweet updateDetails = new Sweet("New Name", "New Cat", 20.0, 20);
+
+        when(sweetRepository.findById(id)).thenReturn(Optional.of(existingSweet));
+        when(sweetRepository.save(existingSweet)).thenReturn(existingSweet);
+
+        // Act
+        Sweet updatedSweet = sweetService.updateSweet(id, updateDetails);
+
+        // Assert
+        assertNotNull(updatedSweet);
+        assertEquals("New Name", updatedSweet.getName());
+        assertEquals("New Cat", updatedSweet.getCategory());
+        assertEquals(20.0, updatedSweet.getPrice());
+    }
+
+    @Test
+    void deleteSweet_shouldCallRepositoryDelete_whenFound() {
+        // Arrange
+        Long id = 1L;
+        Sweet sweet = new Sweet("To Delete", "Cat", 10.0, 10);
+        when(sweetRepository.findById(id)).thenReturn(Optional.of(sweet));
+
+        // Act
+        sweetService.deleteSweet(id);
+
+        // Assert
+        verify(sweetRepository).delete(sweet);
+    }
 }
