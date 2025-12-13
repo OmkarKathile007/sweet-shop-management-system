@@ -19,26 +19,27 @@ public class SweetController {
 
     @PostMapping
     public ResponseEntity<Sweet> addSweet(@RequestBody Sweet sweet) {
-        return ResponseEntity.notFound().build(); // Stub to force failure
+        return ResponseEntity.ok(sweetService.addSweet(sweet));
     }
 
     @GetMapping
     public ResponseEntity<List<Sweet>> getAllSweets() {
-        return ResponseEntity.notFound().build(); // Stub
+        return ResponseEntity.ok(sweetService.getAllSweets());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Sweet> getSweetById(@PathVariable Long id) {
-        return ResponseEntity.notFound().build(); // Stub
+        return ResponseEntity.ok(sweetService.getSweetById(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Sweet> updateSweet(@PathVariable Long id, @RequestBody Sweet sweet) {
-        return ResponseEntity.notFound().build(); // Stub
+        return ResponseEntity.ok(sweetService.updateSweet(id, sweet));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSweet(@PathVariable Long id) {
-        return ResponseEntity.notFound().build(); // Stub
+        sweetService.deleteSweet(id);
+        return ResponseEntity.noContent().build();
     }
 }

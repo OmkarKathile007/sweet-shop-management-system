@@ -1,6 +1,9 @@
 package com.sweetshop.backend.controller;
 
+import com.sweetshop.backend.config.JwtAuthenticationFilter; // Import if needed (usually auto-scanned)
 import com.sweetshop.backend.model.Sweet;
+import com.sweetshop.backend.service.CustomUserDetailsService; // Add Import
+import com.sweetshop.backend.service.JwtService; // Add Import
 import com.sweetshop.backend.service.SweetService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -15,24 +18,32 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(SweetController.class)
-@AutoConfigureMockMvc(addFilters = false) // Disable Security for Unit Test
+@AutoConfigureMockMvc(addFilters = false) // Security is disabled for requests, but beans are still created
 class SweetControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @MockBean
     private SweetService sweetService;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    // --- ADD THESE TWO MOCKS ---
+    // These are required because JwtAuthenticationFilter is loaded by @WebMvcTest
+    @MockBean
+    private JwtService jwtService;
+
+    @MockBean
+    private CustomUserDetailsService customUserDetailsService;
+    // ---------------------------
 
     @Test
     void addSweet_shouldReturnCreatedSweet() throws Exception {
