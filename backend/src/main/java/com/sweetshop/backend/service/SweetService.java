@@ -28,9 +28,17 @@ public class SweetService {
                 .orElseThrow(() -> new RuntimeException("Sweet not found with id: " + id));
     }
     public Sweet updateSweet(Long id, Sweet sweetDetails) {
-        return null; // Force test failure
+        Sweet sweet = getSweetById(id); // Re-use helper to check existence
+
+        sweet.setName(sweetDetails.getName());
+        sweet.setCategory(sweetDetails.getCategory());
+        sweet.setPrice(sweetDetails.getPrice());
+        sweet.setQuantity(sweetDetails.getQuantity());
+
+        return sweetRepository.save(sweet);
     }
     public void deleteSweet(Long id) {
-
+        Sweet sweet = getSweetById(id);
+        sweetRepository.delete(sweet);
     }
 }
