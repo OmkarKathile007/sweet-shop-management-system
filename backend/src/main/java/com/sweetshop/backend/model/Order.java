@@ -21,7 +21,7 @@ public class Order {
     private Double totalPrice;
 
     // MISSING CASCADE HERE INTENTIONALLY to cause RED phase
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true) // Ensure cascade is ALL
     private List<OrderItem> items = new ArrayList<>();
 
     public Order() {}
