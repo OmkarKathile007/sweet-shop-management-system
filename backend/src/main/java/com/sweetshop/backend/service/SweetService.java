@@ -21,9 +21,10 @@ public class SweetService {
     }
 
     public List<Sweet> getAllSweets() {
-        return null; // Force test failure
+        return sweetRepository.findAll();
     }
     public Sweet getSweetById(Long id) {
-        return null; // Force test failure
+        return sweetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sweet not found with id: " + id));
     }
 }
