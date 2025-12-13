@@ -1,6 +1,8 @@
 package com.sweetshop.backend.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min; // Add import
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "sweets")
@@ -15,6 +17,9 @@ public class Sweet {
 
     private String category;
 
+
+    @NotNull(message = "Price is required")
+    @Min(value = 0, message = "Price cannot be negative")
     private Double price; // We will add validation later to fix the test
 
     private Integer quantity;
