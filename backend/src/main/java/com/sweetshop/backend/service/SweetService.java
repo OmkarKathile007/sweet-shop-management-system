@@ -16,7 +16,7 @@ public class SweetService {
     }
 
     public Sweet addSweet(Sweet sweet) {
-        return null; // Force test failure
+        return sweetRepository.save(sweet);
     }
 
     public List<Sweet> getAllSweets() {
