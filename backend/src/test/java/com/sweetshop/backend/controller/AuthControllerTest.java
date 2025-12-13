@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean; // Correct import for MockBean
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import com.sweetshop.backend.dto.LoginRequest;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -45,6 +46,22 @@ class AuthControllerTest {
 
         // Act & Assert
         mockMvc.perform(post("/api/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk()); // We expect 200 OK
+    }
+    @Test
+    void login_shouldReturnToken_whenCredentialsAreValid() throws Exception {
+        // Arrange
+        LoginRequest request = new LoginRequest();
+        request.setUsername("validUser");
+        request.setPassword("validPassword");
+
+        String fakeToken = "fake-jwt-token";
+        when(authService.login("validUser", "validPassword")).thenReturn(fakeToken);
+
+        // Act & Assert
+        mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk()); // We expect 200 OK
