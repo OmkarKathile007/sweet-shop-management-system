@@ -3,8 +3,9 @@ package com.sweetshop.backend.service;
 import com.sweetshop.backend.model.Sweet;
 import com.sweetshop.backend.repository.SweetRepository;
 import org.springframework.stereotype.Service;
-
+import java.util.Optional;
 import java.util.List;
+
 
 @Service
 public class SweetService {
@@ -20,6 +21,9 @@ public class SweetService {
     }
 
     public List<Sweet> getAllSweets() {
+        return null; // Force test failure
+    }
+    public Sweet getSweetById(Long id) {
         return null; // Force test failure
     }
 }
