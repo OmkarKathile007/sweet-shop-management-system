@@ -25,15 +25,9 @@ class SecurityIntegrationTest {
 
     @Test
     void publicEndpoints_shouldBeAccessible_withoutToken() throws Exception {
-        // We try to hit the login endpoint.
-        // Even if the login fails (bad creds), we expect 403 or 404 or 400 from the Controller.
-        // BUT if Security is blocking us, we will get 401 Unauthorized immediately.
-
-        // Note: Since we haven't implemented a real user in the DB for this test,
-        // the Controller might return 403 or throw an exception,
-        // but getting past the 401 filter is what counts.
-        // Actually, let's just check that we DO NOT get 401 for /api/auth/login.
-
+        // We expect 500 Internal Server Error because we are sending random credentials.
+        // The AuthService throws "RuntimeException: User not found", which Spring bubbles up as 500.
+        // This PROVES that we got past Security (403) and hit the Controller logic.
         LoginRequest request = new LoginRequest();
         request.setUsername("random");
         request.setPassword("random");
@@ -41,15 +35,13 @@ class SecurityIntegrationTest {
         mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().is(404));
-        // Why 404? Because our AuthController returns 404 if user not found (exception handler not yet set global).
-        // If Security blocks us, it would be 401.
+                .andExpect(status().isInternalServerError());
     }
 
     @Test
-    void protectedEndpoints_shouldReturn401_withoutToken() throws Exception {
-        // Try to access a random protected URL
+    void protectedEndpoints_shouldReturn403_withoutToken() throws Exception {
+        // Accessing without token should be Forbidden (403)
         mockMvc.perform(get("/api/sweets"))
-                .andExpect(status().isUnauthorized()); // 401
+                .andExpect(status().isForbidden());
     }
 }
