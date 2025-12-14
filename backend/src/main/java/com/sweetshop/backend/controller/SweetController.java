@@ -44,4 +44,14 @@ public class SweetController {
         sweetService.deleteSweet(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/search")
+    public List<Sweet> searchSweets(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) Double minPrice,
+            @RequestParam(required = false) Double maxPrice
+    ) {
+        return sweetService.searchSweets(name, category, minPrice, maxPrice);
+    }
 }

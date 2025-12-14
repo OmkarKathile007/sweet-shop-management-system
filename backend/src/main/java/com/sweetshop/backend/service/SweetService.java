@@ -41,4 +41,8 @@ public class SweetService {
         Sweet sweet = getSweetById(id);
         sweetRepository.delete(sweet);
     }
+
+    public List<Sweet> searchSweets(String name, String category, Double minPrice, Double maxPrice) {
+        return sweetRepository.searchSweets(name, category, minPrice, maxPrice);
+    }
 }
