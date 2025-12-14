@@ -22,6 +22,9 @@ Built using **Test-Driven Development (TDD)** and **Clean Architecture**, this c
 
 ## 🎯 Deliverables & Compliance
 This project strictly adheres to the assessment requirements. 
+This project was built incrementally using small, meaningful commits.
+The commit history reflects feature-by-feature development, bug fixes,
+and test-driven iterations.
 *Evidence of meeting all core requirements including API, Frontend, TDD, and AI Policy.*
 
 ---
