@@ -32,8 +32,8 @@ export interface OrderRequest {
 
 export interface OrderResponse {
   id: number;
-  totalAmount: number;
-  createdAt: string;
+  totalPrice: number; // Changed from totalAmount
+  orderDate: string;  // Changed from createdAt
 }
 
 // ERROR

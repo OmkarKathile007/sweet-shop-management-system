@@ -57,12 +57,12 @@ export const OrdersPage: React.FC = () => {
                     Order #{order.id}
                   </h3>
                   <p className="mt-1 max-w-2xl text-sm text-gray-500">
-                    Placed on: {new Date(order.createdAt).toLocaleString()}
+                    Placed on: {new Date(order.orderDate).toLocaleString()}
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-bold text-gray-900">
-                    ${(order.totalAmount || 0).toFixed(2)}
+                    ${(order.totalPrice || 0).toFixed(2)}
                   </p>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                     Completed
