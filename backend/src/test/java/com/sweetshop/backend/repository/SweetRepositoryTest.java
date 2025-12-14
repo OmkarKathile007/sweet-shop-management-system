@@ -19,7 +19,7 @@ class SweetRepositoryTest {
     @Test
     void save_shouldFail_whenPriceIsNegative() {
         // Arrange
-        Sweet sweet = new Sweet("Negative Candy", "Hard Candy", -10.0, 100);
+        Sweet sweet = new Sweet("Negative Candy", "Hard Candy", -10.0, 100,"");
 
         // Act & Assert
         // We expect this to fail, but since we haven't added @Min(0) yet,

@@ -30,8 +30,8 @@ class SweetServiceTest {
     @Test
     void addSweet_shouldSaveAndReturnSweet() {
         // Arrange
-        Sweet inputSweet = new Sweet("Laddu", "Traditional", 10.0, 50);
-        Sweet savedSweet = new Sweet("Laddu", "Traditional", 10.0, 50);
+        Sweet inputSweet = new Sweet("Laddu", "Traditional", 10.0, 50,"");
+        Sweet savedSweet = new Sweet("Laddu", "Traditional", 10.0, 50,"");
         savedSweet.setId(1L);
 
         when(sweetRepository.save(any(Sweet.class))).thenReturn(savedSweet);
@@ -47,8 +47,8 @@ class SweetServiceTest {
     @Test
     void getAllSweets_shouldReturnListOfSweets() {
         // Arrange
-        Sweet s1 = new Sweet("S1", "C1", 10.0, 10);
-        Sweet s2 = new Sweet("S2", "C2", 20.0, 20);
+        Sweet s1 = new Sweet("S1", "C1", 10.0, 10,"");
+        Sweet s2 = new Sweet("S2", "C2", 20.0, 20,"");
         when(sweetRepository.findAll()).thenReturn(Arrays.asList(s1, s2));
 
         // Act
@@ -62,7 +62,7 @@ class SweetServiceTest {
     @Test
     void getSweetById_shouldReturnSweet_whenFound() {
         // Arrange
-        Sweet sweet = new Sweet("Laddu", "Trad", 10.0, 50);
+        Sweet sweet = new Sweet("Laddu", "Trad", 10.0, 50,"");
         when(sweetRepository.findById(1L)).thenReturn(Optional.of(sweet));
 
         // Act
@@ -88,10 +88,10 @@ class SweetServiceTest {
     void updateSweet_shouldUpdateFields_whenFound() {
         // Arrange
         Long id = 1L;
-        Sweet existingSweet = new Sweet("Old Name", "Old Cat", 10.0, 10);
+        Sweet existingSweet = new Sweet("Old Name", "Old Cat", 10.0, 10,"");
         existingSweet.setId(id);
 
-        Sweet updateDetails = new Sweet("New Name", "New Cat", 20.0, 20);
+        Sweet updateDetails = new Sweet("New Name", "New Cat", 20.0, 20,"");
 
         when(sweetRepository.findById(id)).thenReturn(Optional.of(existingSweet));
         when(sweetRepository.save(existingSweet)).thenReturn(existingSweet);
@@ -110,7 +110,7 @@ class SweetServiceTest {
     void deleteSweet_shouldCallRepositoryDelete_whenFound() {
         // Arrange
         Long id = 1L;
-        Sweet sweet = new Sweet("To Delete", "Cat", 10.0, 10);
+        Sweet sweet = new Sweet("To Delete", "Cat", 10.0, 10,"");
         when(sweetRepository.findById(id)).thenReturn(Optional.of(sweet));
 
         // Act

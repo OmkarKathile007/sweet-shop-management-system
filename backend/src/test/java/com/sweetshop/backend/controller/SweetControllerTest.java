@@ -47,7 +47,7 @@ class SweetControllerTest {
 
     @Test
     void addSweet_shouldReturnCreatedSweet() throws Exception {
-        Sweet sweet = new Sweet("Laddu", "Trad", 10.0, 50);
+        Sweet sweet = new Sweet("Laddu", "Trad", 10.0, 50,"");
         when(sweetService.addSweet(any(Sweet.class))).thenReturn(sweet);
 
         mockMvc.perform(post("/api/sweets")
@@ -59,7 +59,7 @@ class SweetControllerTest {
 
     @Test
     void getAllSweets_shouldReturnList() throws Exception {
-        List<Sweet> sweets = Arrays.asList(new Sweet("S1", "C1", 10.0, 10));
+        List<Sweet> sweets = Arrays.asList(new Sweet("S1", "C1", 10.0, 10,""));
         when(sweetService.getAllSweets()).thenReturn(sweets);
 
         mockMvc.perform(get("/api/sweets"))

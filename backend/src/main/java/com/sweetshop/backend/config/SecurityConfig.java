@@ -2,6 +2,7 @@ package com.sweetshop.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,9 +36,23 @@ public class SecurityConfig {
                 // 2. Disable CSRF (not needed for stateless JWT)
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // Public endpoints
-                        .requestMatchers("/api/sweets").permitAll() // Allow viewing sweets without login (optional, remove if you want strict auth)
-                        .anyRequest().authenticated() // Everything else requires login
+                        // Public Endpoints
+                        .requestMatchers("/api/auth/**").permitAll() // Login/Register
+
+                        // Sweets: Allow viewing (GET) to everyone
+                        .requestMatchers(HttpMethod.GET, "/api/sweets/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/sweets/search").permitAll()
+
+                        // Sweets: Modify (POST, PUT, DELETE) requires Authentication (and effectively Admin role if controller checks)
+                        .requestMatchers(HttpMethod.POST, "/api/sweets/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/api/sweets/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/api/sweets/**").authenticated()
+
+                        // Orders: Requires Authentication
+                        .requestMatchers("/api/orders/**").authenticated()
+
+                        // Fallback: Everything else requires login
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

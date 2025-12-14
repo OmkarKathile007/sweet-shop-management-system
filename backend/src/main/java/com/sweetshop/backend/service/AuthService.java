@@ -41,4 +41,6 @@ public class AuthService {
         // 3. Generate and return token
         return jwtService.generateToken(username);
     }
+
+
 }

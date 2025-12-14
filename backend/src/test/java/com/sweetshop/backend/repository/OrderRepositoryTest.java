@@ -29,7 +29,7 @@ class OrderRepositoryTest {
         User user = new User("customer", "pass", "USER");
         entityManager.persist(user);
 
-        Sweet sweet = new Sweet("Kaju Katli", "Premium", 50.0, 100);
+        Sweet sweet = new Sweet("Kaju Katli", "Premium", 50.0, 100,"");
         entityManager.persist(sweet);
 
         // 2. Create Order

@@ -35,7 +35,7 @@ public class SweetService {
         sweet.setPrice(sweetDetails.getPrice());
         sweet.setDescription(sweetDetails.getDescription());
         // sweet.setImageUrl(...); // REMOVED
-
+        sweet.setCategory(sweetDetails.getCategory());
         return sweetRepository.save(sweet);
     }
 

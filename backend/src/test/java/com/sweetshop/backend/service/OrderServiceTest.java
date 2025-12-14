@@ -44,7 +44,7 @@ class OrderServiceTest {
         User user = new User(username, "pass", "USER");
 
         // We have 100 laddus in stock
-        Sweet laddu = new Sweet("Laddu", "Trad", 10.0, 100);
+        Sweet laddu = new Sweet("Laddu", "Trad", 10.0, 100,"");
         laddu.setId(1L);
 
         // Request to buy 5 laddus
