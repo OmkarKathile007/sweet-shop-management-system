@@ -73,9 +73,9 @@ A visual tour of the user and administrator experiences.
 | | |
 |:-------------------------:|:-------------------------:|
 | ![User Registration](frontend/public/user1.png)<br><sub>**User Registration & Login**</sub> | ![Admin Dashboard](frontend/public/admin2.png)<br><sub>**Administrative Dashboard Overview**</sub> |
-| ![Customer Catalog](frontend/public/user2.png)<br><sub>**Customer Product Catalog**</sub> | ![Inventory Management](frontend/public/admin3.png)<br><sub>**Sweet Inventory Management**</sub> |
-| ![Order History](frontend/public/user3.png)<br><sub>**Customer Order History Tracking**</sub> | ![Restock Management](frontend/public/admin4.png)<br><sub>**Stock Restocking Interface**</sub> |
-| ![Admin Reports](frontend/public/admin5.png)<br><sub>**Administrative Sales & Activity Reports**</sub> | ![System Overview](frontend/public/admin6.png)<br><sub>**System Configuration & Overview**</sub> |
+| ![Customer Catalog](frontend/public/user2.png)<br><sub>**Customer Sweet Catalog**</sub> | ![Inventory Management](frontend/public/admin3.png)<br><sub>**Add/Update Sweet (Admin)**</sub> |
+| ![Order History](frontend/public/user3.png)<br><sub>**Place order**</sub> | ![Restock Management](frontend/public/admin4.png)<br><sub>**search sweet**</sub> |
+| ![Admin Reports](frontend/public/admin5.png)<br><sub>**Administrative Sales & Activity Reports**</sub> | ![System Overview](frontend/public/admin6.png)<br><sub>**delete sweet**</sub> |
 
 
 ---
