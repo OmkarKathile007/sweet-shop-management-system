@@ -107,19 +107,28 @@ export const SweetsPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50 pb-20">
       {/* --- Header --- */}
       <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Sweet Shop</h1>
-            <p className="text-sm text-gray-500">Welcome, {user?.username} ({user?.role})</p>
-          </div>
-          <button 
-            onClick={handleLogout}
-            className="text-red-600 hover:text-red-800 font-medium"
-          >
-            Logout
-          </button>
-        </div>
-      </header>
+  <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+    <div>
+      <h1 className="text-3xl font-bold text-gray-900">Sweet Shop</h1>
+      <p className="text-sm text-gray-500">Welcome, {user?.username} ({user?.role})</p>
+    </div>
+    
+    <div className="flex gap-4">
+      <button 
+        onClick={() => navigate('/orders')}
+        className="text-gray-600 hover:text-blue-600 font-medium transition-colors"
+      >
+        My Orders
+      </button>
+      <button 
+        onClick={handleLogout}
+        className="text-red-600 hover:text-red-800 font-medium"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</header>
 
       <main className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         
