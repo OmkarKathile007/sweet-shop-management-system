@@ -1,6 +1,7 @@
 package com.sweetshop.backend.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "order_items")
@@ -16,6 +17,7 @@ public class OrderItem {
 
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
+    @JsonIgnore
     private Order order;
 
     private Integer quantity;

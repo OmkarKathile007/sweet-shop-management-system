@@ -1,9 +1,11 @@
 package com.sweetshop.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "orders") // "order" is a reserved SQL keyword, so we use "orders"
@@ -15,8 +17,10 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime orderDate;
     private Double totalPrice;
 
