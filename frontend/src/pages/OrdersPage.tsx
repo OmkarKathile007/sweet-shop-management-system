@@ -62,7 +62,7 @@ export const OrdersPage: React.FC = () => {
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-bold text-gray-900">
-                    ${(order.totalPrice || 0).toFixed(2)}
+                    ₹{(order.totalPrice || 0).toFixed(2)}
                   </p>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                     Completed
