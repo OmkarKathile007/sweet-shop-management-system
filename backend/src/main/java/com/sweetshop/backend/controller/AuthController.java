@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.sweetshop.backend.dto.LoginRequest; // Add import
 import com.sweetshop.backend.dto.AuthResponse;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
