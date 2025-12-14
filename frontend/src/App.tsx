@@ -3,6 +3,7 @@ import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { SweetsPage } from './pages/SweetsPage';
 import { OrdersPage } from './pages/OrdersPage';
+import { AddSweetPage } from './pages/AddSweetPage';
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/sweets" element={<SweetsPage />} />
         <Route path="/orders" element={<OrdersPage />} />
+
+        <Route path="/add-sweet" element={<AddSweetPage />} />
         
         <Route path="/" element={<Navigate to="/sweets" replace />} />
       </Routes>

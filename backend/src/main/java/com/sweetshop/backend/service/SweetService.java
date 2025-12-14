@@ -43,6 +43,11 @@ public class SweetService {
     }
 
     public List<Sweet> searchSweets(String name, String category, Double minPrice, Double maxPrice) {
-        return sweetRepository.searchSweets(name, category, minPrice, maxPrice);
+
+        String namePattern = (name != null && !name.isEmpty()) ? "%" + name.toLowerCase() + "%" : null;
+        String categoryPattern = (category != null && !category.isEmpty()) ? "%" + category.toLowerCase() + "%" : null;
+
+        return sweetRepository.searchSweets(namePattern, categoryPattern, minPrice, maxPrice);
+
     }
 }
