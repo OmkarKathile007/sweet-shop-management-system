@@ -23,14 +23,17 @@ public class Sweet {
     private Double price; // We will add validation later to fix the test
 
     private Integer quantity;
+    @Column(length = 500) // Allow longer text for descriptions
+    private String description;
 
     public Sweet() {}
 
-    public Sweet(String name, String category, Double price, Integer quantity) {
+    public Sweet(String name, String category, Double price, Integer quantity, String description) {
         this.name = name;
         this.category = category;
         this.price = price;
         this.quantity = quantity;
+        this.description = description;
     }
 
     // Getters and Setters
@@ -48,4 +51,7 @@ public class Sweet {
 
     public Integer getQuantity() { return quantity; }
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }
