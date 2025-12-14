@@ -17,11 +17,11 @@ public class DataInitializer {
             // Only add data if the table is empty
             if (sweetRepository.count() == 0) {
                 List<Sweet> sweets = List.of(
-                        new Sweet("Kaju Katli", "Cashew", 12.50, 50, "Rich cashew fudge topped with silver leaf."),
-                        new Sweet("Gulab Jamun", "Syrup", 8.00, 100, "Soft berry-sized balls dunked in rose flavored sugar syrup."),
-                        new Sweet("Rasgulla", "Syrup", 7.50, 80, "Spongy cottage cheese balls soaked in light syrup."),
-                        new Sweet("Mysore Pak", "Ghee", 10.00, 40, "Traditional roasted gram flour fudge made with pure ghee."),
-                        new Sweet("Jalebi", "Fried", 6.00, 60, "Crispy deep-fried spirals soaked in saffron sugar syrup.")
+                        new Sweet("Kaju Katli", "Cashew", 220.50, 50, "Rich cashew fudge topped with silver leaf."),
+                        new Sweet("Gulab Jamun", "Syrup", 178.00, 100, "Soft berry-sized balls dunked in rose flavored sugar syrup."),
+                        new Sweet("Rasgulla", "Syrup", 120.50, 80, "Spongy cottage cheese balls soaked in light syrup."),
+                        new Sweet("Mysore Pak", "Ghee", 80.00, 40, "Traditional roasted gram flour fudge made with pure ghee."),
+                        new Sweet("Jalebi", "Fried", 90.00, 60, "Crispy deep-fried spirals soaked in saffron sugar syrup.")
                 );
 
                 sweetRepository.saveAll(sweets);

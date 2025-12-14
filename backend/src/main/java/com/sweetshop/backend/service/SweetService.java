@@ -28,15 +28,29 @@ public class SweetService {
                 .orElseThrow(() -> new RuntimeException("Sweet not found with id: " + id));
     }
     public Sweet updateSweet(Long id, Sweet sweetDetails) {
-        Sweet sweet = getSweetById(id); // Re-use helper to check existence
+        Sweet sweet = sweetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sweet not found with id: " + id));
 
         sweet.setName(sweetDetails.getName());
-        sweet.setCategory(sweetDetails.getCategory());
         sweet.setPrice(sweetDetails.getPrice());
-        sweet.setQuantity(sweetDetails.getQuantity());
+        sweet.setDescription(sweetDetails.getDescription());
+        // sweet.setImageUrl(...); // REMOVED
 
         return sweetRepository.save(sweet);
     }
+
+    public Sweet restockSweet(Long id, int quantityToAdd) {
+        Sweet sweet = sweetRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sweet not found with id: " + id));
+
+        if (quantityToAdd <= 0) {
+            throw new IllegalArgumentException("Restock quantity must be positive");
+        }
+
+        sweet.setQuantity(sweet.getQuantity() + quantityToAdd);
+        return sweetRepository.save(sweet);
+    }
+
     public void deleteSweet(Long id) {
         Sweet sweet = getSweetById(id);
         sweetRepository.delete(sweet);

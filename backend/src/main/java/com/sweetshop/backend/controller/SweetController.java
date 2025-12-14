@@ -4,6 +4,9 @@ import com.sweetshop.backend.model.Sweet;
 import com.sweetshop.backend.service.SweetService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -35,14 +38,31 @@ public class SweetController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Sweet> updateSweet(@PathVariable Long id, @RequestBody Sweet sweet) {
-        return ResponseEntity.ok(sweetService.updateSweet(id, sweet));
+    public ResponseEntity<Sweet> updateSweet(@PathVariable Long id, @RequestBody Sweet sweetDetails) {
+        Sweet updatedSweet = sweetService.updateSweet(id, sweetDetails);
+        return ResponseEntity.ok(updatedSweet);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSweet(@PathVariable Long id) {
-        sweetService.deleteSweet(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<?> deleteSweet(@PathVariable Long id) {
+        try {
+            sweetService.deleteSweet(id); // Assuming this calls repo.deleteById(id)
+            return ResponseEntity.noContent().build();
+        } catch (DataIntegrityViolationException e) {
+            // This catches the specific SQL error 23503
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("Cannot delete this sweet because it has been ordered by customers. Please set the Quantity to 0 instead.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while deleting the sweet.");
+        }
+    }
+
+    @PostMapping("/{id}/restock")
+    public ResponseEntity<Sweet> restockSweet(@PathVariable Long id, @RequestParam int quantity) {
+        // Usage: POST /api/sweets/5/restock?quantity=50
+        Sweet restockedSweet = sweetService.restockSweet(id, quantity);
+        return ResponseEntity.ok(restockedSweet);
     }
 
     @GetMapping("/search")
